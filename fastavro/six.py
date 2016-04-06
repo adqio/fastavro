@@ -34,6 +34,14 @@ else:  # Python 2x
     xrange = xrange
 
     def py2_btou(n, encoding=_encoding):
+        try:
+            decoded = unicode(n, encoding) # flake8: noqa
+        except:
+            print("could not decode as utf8, replacing:", n)
+            decoded = unicode(n, encoding, errors='replace')
+        return decoded
+
+
         return unicode(n, encoding) # flake8: noqa
 
     def py2_utob(n, encoding=_encoding):
